@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Usage: dpt db-pull --app [<heroku_app_name>] [<local_postgres_database_name>]
+# Summary: Pulls the latest captured DB into your local database (PostgreSQL only)
+set -e
+
+# Provide dpt completions
+if [ "$1" = "--complete" ]; then
+  echo --remote
+  echo --app
+  exit
+fi
+
+curl -o /tmp/heroku_db.dump `heroku pgbackups:url $1 $2` &&
+pg_restore --verbose --clean --no-acl --no-owner -U root -d $3 /tmp/heroku_db.dump

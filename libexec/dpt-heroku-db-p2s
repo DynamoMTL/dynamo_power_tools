@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Usage: dpt heroku-db-p2s
+# Summary: Copies the latest captured DB from production to staging
+# Help: You will want to run this command in a git repository, probably a rails
+# application which as both production and staging remotes setup in for your
+# for our application
+set -e
+
+heroku pgbackups:restore DATABASE `heroku pgbackups:url --remote production` --remote staging

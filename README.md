@@ -12,7 +12,7 @@ following links:
 ## Install
 
     cd ~/
-    git clone git@github.com:DynamoMTL/dynamo_power_tools.com.git .dpt
+    git clone git@github.com:DynamoMTL/dynamo_power_tools.git .dpt
 
 For bash users:
 

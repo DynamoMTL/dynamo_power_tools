@@ -22,7 +22,7 @@ For bash users:
 For zsh users:
 
     echo 'eval "$($HOME/.dpt/bin/dpt init -)"' >> ~/.zshenv
-    source ~/.zshenv'
+    source ~/.zshenv
 
 Then finally:
 

@@ -10,5 +10,6 @@ if [ "$1" = "--complete" ]; then
   exit
 fi
 
+heroku login &&
 curl -o /tmp/heroku_db.dump `heroku pgbackups:url $1 $2` &&
 pg_restore --verbose --clean --no-acl --no-owner -U root -d $3 /tmp/heroku_db.dump

@@ -7,4 +7,5 @@
 set -e
 
 heroku login &&
+heroku pgbackups:capture -r production --expire &&
 heroku pgbackups:restore DATABASE `heroku pgbackups:url --remote production` --remote staging

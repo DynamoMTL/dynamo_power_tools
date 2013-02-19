@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Usage: dpt db-pull --app [<heroku_app_name>] [<local_postgres_database_name>]
-# Summary: Pulls the latest captured DB into your local database (PostgreSQL only)
+# Summary: Pulls the latest captured DB into your local database (PostgreSQL only). Assumes a root user with no password.
 set -e
 
 # Provide dpt completions

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Usage: dpt heroku-mongo-pull --remote [<remote_name>]
+# Summary: Pulls the specified remote Mongo DB into your local database.
+# Help: Requires the heroku-mongodb plugin to be installed.
+# heroku plugins:install git://github.com/hsbt/heroku-mongodb.git
+# Automatically detects your local development database based on config/mongoid.yml
+set -e
+
+# Provide dpt completions
+if [ "$1" = "--complete" ]; then
+  echo --remote
+  exit
+fi
+
+info() {
+  echo "--> $1"
+}
+
+path="$_DPT_ROOT/libexec/mongo_config_parser.rb"
+database=$(ruby $path)
+
+info "Detected database: $database"
+
+dump_path="/tmp/$database"
+rm -rf $dump_path
+
+heroku login &&
+heroku mongohq:dump $dump_path $1 $2
+
+restore_path=$(find $dump_path -name 'app*')
+info "Restoring from: $restore_path..."
+mongorestore --db $database --drop $restore_path
+
+info "Completed restoring database from $restore_path."

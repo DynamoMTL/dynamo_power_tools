@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Usage: dpt tmux-pair
+# Summary: Setups up tmux for pairing (shared session)
+set -e
+
+tmux -S /tmp/pair
+chmod 777 /tmp/pair
